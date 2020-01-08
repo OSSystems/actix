@@ -65,6 +65,7 @@ mod mailbox;
 pub mod actors;
 pub mod clock;
 pub mod fut;
+pub mod fut_new;
 pub mod io;
 pub mod registry;
 pub mod sync;
