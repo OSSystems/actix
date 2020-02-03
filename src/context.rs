@@ -149,6 +149,15 @@ where
     pub fn connected(&self) -> bool {
         self.parts.connected()
     }
+
+    pub fn with_actor<F>(&mut self, f: F)
+    where
+        F: Fn(&mut A, &mut Self) + 'static,
+    {
+        self.spawn(Box::new(
+            crate::fut::wrap_future(async {}).map(move |_, act, ctx| f(act, ctx)),
+        ));
+    }
 }
 
 impl<A> AsyncContextParts<A> for Context<A>
