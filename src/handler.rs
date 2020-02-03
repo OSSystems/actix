@@ -162,7 +162,7 @@ where
     A::Context: AsyncContext<A>,
 {
     fn handle<R: ResponseChannel<M>>(self, ctx: &mut A::Context, tx: Option<R>) {
-        ctx.spawn(self.then(move |res, this, _| {
+        ctx.wait(self.then(move |res, this, _| {
             if let Some(tx) = tx {
                 tx.send(res);
             }
